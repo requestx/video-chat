@@ -108,7 +108,17 @@ window.addEventListener( 'load', () => {
                 if( va.length >= 2 ){
                   if (confirm('It looks like you have 2 video sources available. Do you want to emit both?')) {
                         multiVideoStream = true
-
+                        for(let i = 0; i < va.length; i++) {
+                            navigator.mediaDevices.getUserMedia( {
+                                video: {
+                                    exact: { deviceId: va[i] } 
+                                },
+                                audio: false
+                            }).then((stream)=>{
+                                broadcastExtraTracks(stream, 'video')
+                                myStream.addTrack( stream )
+                            })
+                        }
                     } else {
                         multiVideoStream = false
                         console.log('didnt stream videos')
