@@ -116,7 +116,6 @@ window.addEventListener( 'load', () => {
                                 audio: false
                             }).then((stream)=>{
                                 broadcastExtraTracks(stream, 'video')
-                                myStream.addTrack( stream )
                             })
                         }
                     } else {
